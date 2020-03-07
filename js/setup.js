@@ -1,4 +1,4 @@
-// Файл setup.js
+
 'use strict';
 
 var WIZARD_NAMES = ['Дамблдор', 'Волдеморт', 'Доктор Стрендж', 'Гарри Поттер'];
@@ -34,9 +34,7 @@ var wizards = [
 var ESC_KEY = 'Escape';
 var ENTER_KEY = 'Enter';
 
-// Нажатие на элемент .setup-open удаляет класс hidden
-// у блока setup. Нажатие на элемент .setup-close, расположенный
-// внутри блока setup возвращает ему класс hidden.
+
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
