@@ -9,8 +9,8 @@ userDialog.classList.remove('hidden');
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
+  .content
+  .querySelector('.setup-similar-item');
 
 
 var wizards = [
@@ -31,6 +31,15 @@ var wizards = [
     coatColor: 'rgb(127, 127, 127)'
   }
 ];
+var ESC_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
+
+// Нажатие на элемент .setup-open удаляет класс hidden
+// у блока setup. Нажатие на элемент .setup-close, расположенный
+// внутри блока setup возвращает ему класс hidden.
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
 
 
 var renderWizard = function (wizard) {
@@ -40,7 +49,7 @@ var renderWizard = function (wizard) {
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
 
   return wizardElement;
-}
+};
 
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
@@ -49,3 +58,40 @@ for (var i = 0; i < wizards.length; i++) {
 similarListElement.appendChild(fragment);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === ESC_KEY) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === ENTER_KEY) {
+    closePopup();
+  }
+});
